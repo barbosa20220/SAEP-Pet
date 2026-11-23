@@ -1,0 +1,8 @@
+<div class="row">
+<div class="col-md-6 mb-3"><label class="form-label">Pet</label><select class="form-select" name="pet_id" required><option value="">Selecione</option>@foreach($pets as $p)<option value="{{ $p->id }}" @selected(old('pet_id',$agendamento->pet_id ?? '')==$p->id)>{{ $p->nome }} — {{ $p->tutor }}</option>@endforeach</select></div>
+<div class="col-md-3 mb-3"><label class="form-label">Data</label><input class="form-control" type="date" name="data_agendamento" min="{{ date('Y-m-d') }}" value="{{ old('data_agendamento',$agendamento->data_agendamento ?? '') }}" required></div>
+<div class="col-md-3 mb-3"><label class="form-label">Horário</label><input class="form-control" type="time" name="horario" value="{{ old('horario',isset($agendamento)?substr($agendamento->horario,0,5):'') }}" required></div>
+<div class="col-md-6 mb-3"><label class="form-label">Serviço</label><select class="form-select" name="servico" required>@foreach(['Banho','Tosa','Banho e tosa','Consulta'] as $s)<option @selected(old('servico',$agendamento->servico ?? '')==$s)>{{ $s }}</option>@endforeach</select></div>
+@if(!$novo)<div class="col-md-6 mb-3"><label class="form-label">Status</label><select class="form-select" name="status">@foreach(['Pendente','Confirmado','Em andamento','Concluído','Cancelado'] as $s)<option @selected(old('status',$agendamento->status)==$s)>{{ $s }}</option>@endforeach</select></div>@endif
+<div class="col-12 mb-3"><label class="form-label">Observações</label><textarea class="form-control" name="observacao" rows="3">{{ old('observacao',$agendamento->observacao ?? '') }}</textarea></div>
+</div>
